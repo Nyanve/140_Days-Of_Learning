@@ -1,0 +1,10 @@
+Learned Intro to Docker
+How to install Docker in Windows 
+Helpful Repo: https://github.com/mitul3737/udemy-docker-mastery
+
+Some helpful resources for me:
+https://stackoverflow.com/questions/63845591/docker-wsl-2-installation-is-incomplete
+
+https://youtu.be/066-9yw8-7c
+https://youtu.be/4ZY_4OeyJsw
+https://youtu.be/QASAqcuuzgI
