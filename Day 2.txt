@@ -1,0 +1,105 @@
+Assignment DNS:
+
+PS C:\Users\DELL> docker network create dude
+52d98f92d4bfd8b2c88c177c98a14a4a5a492d48289b118dcca73e299dfffea4
+PS C:\Users\DELL> docker container run -d --net dude --net-alias search elasticsearch:2
+Unable to find image 'elasticsearch:2' locally
+2: Pulling from library/elasticsearch
+05d1a5232b46: Pull complete
+5cee356eda6b: Pull complete
+89d3385f0fd3: Pull complete
+65dd87f6620b: Pull complete
+78a183a01190: Pull complete
+1a4499c85f97: Pull complete
+2c9d39b4bfc1: Pull complete
+1b1cec2222c9: Pull complete
+59ff4ce9df68: Pull complete
+1976bc3ee432: Pull complete
+a27899b7a5b5: Pull complete
+b0fc7d2c927a: Pull complete
+6d94b96bbcd0: Pull complete
+6f5bf40725fd: Pull complete
+2bf2a528ae9a: Pull complete
+Digest: sha256:41ed3a1a16b63de740767944d5405843db00e55058626c22838f23b413aa4a39
+Status: Downloaded newer image for elasticsearch:2
+3bf69ff660722c4483c1a364dc9e71cc5eb42a999110a0356b87f49d38398f0c
+PS C:\Users\DELL> docker container ls
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                NAMES
+3bf69ff66072   elasticsearch:2   "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   9200/tcp, 9300/tcp   sharp_sutherland
+PS C:\Users\DELL> docker container run -d --net dude --net-alias search elasticsearch:2
+61713f6409e697beb954cf240674432a15b09699a3b56501cea348655d393b8c
+PS C:\Users\DELL> docker container ls
+CONTAINER ID   IMAGE             COMMAND                  CREATED              STATUS              PORTS                NAMES
+61713f6409e6   elasticsearch:2   "/docker-entrypoint.…"   About a minute ago   Up About a minute   9200/tcp, 9300/tcp   flamboyant_kepler
+3bf69ff66072   elasticsearch:2   "/docker-entrypoint.…"   7 minutes ago        Up 7 minutes        9200/tcp, 9300/tcp   sharp_sutherland
+PS C:\Users\DELL> docker container run --rm --net dude alpine nslookup search
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+a0d0a0d46f8b: Pull complete
+Digest: sha256:e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a
+Status: Downloaded newer image for alpine:latest
+Server:         127.0.0.11
+Address:        127.0.0.11:53
+
+Non-authoritative answer:
+*** Can't find search: No answer
+
+Non-authoritative answer:
+Name:   search
+Address: 172.18.0.2
+Name:   search
+Address: 172.18.0.3
+
+PS C:\Users\DELL> docker container run --rm --net dude centos curl -s search:9200
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+a1d0c7532777: Pull complete
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image for centos:latest
+{
+  "name" : "Rawhide Kid",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "5h_JeYejRi-wEcDAEUIsvg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+PS C:\Users\DELL> docker container run --rm --net dude centos curl -s search:9200
+{
+  "name" : "Rawhide Kid",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "5h_JeYejRi-wEcDAEUIsvg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+PS C:\Users\DELL> docker container ls
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                NAMES
+61713f6409e6   elasticsearch:2   "/docker-entrypoint.…"   37 minutes ago   Up 37 minutes   9200/tcp, 9300/tcp   flamboyant_kepler
+3bf69ff66072   elasticsearch:2   "/docker-entrypoint.…"   43 minutes ago   Up 43 minutes   9200/tcp, 9300/tcp   sharp_sutherland
+PS C:\Users\DELL> docker container rm -f flamboyant_keplar
+Error: No such container: flamboyant_keplar
+PS C:\Users\DELL> docker container rm -f flamboyant_kepler
+flamboyant_kepler
+PS C:\Users\DELL> dokcer container rm -f sharp_sutherland
+dokcer : The term 'dokcer' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ dokcer container rm -f sharp_sutherland
++ ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dokcer:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\DELL> docker container rm -f sharp_sutherland
+sharp_sutherland
+PS C:\Users\DELL> docker container ls -a
+CONTAINER ID   IMAGE

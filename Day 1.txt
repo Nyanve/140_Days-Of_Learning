@@ -8,3 +8,149 @@ https://stackoverflow.com/questions/63845591/docker-wsl-2-installation-is-incomp
 https://youtu.be/066-9yw8-7c
 https://youtu.be/4ZY_4OeyJsw
 https://youtu.be/QASAqcuuzgI
+
+
+
+Assignment 1:
+PS C:\Users\DELL> docker container run --publish 80:80 -d nginx
+9fd48d4687c5229d0a54f4c7f231327d0e3d5320be0074999dc372f727685e70
+PS C:\Users\DELL> docker container run --publish 8080:80 -d mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+a330b6cecb98: Already exists
+9c8f656c32b8: Pull complete
+88e473c3f553: Pull complete
+062463ea5d2f: Pull complete
+daf7e3bdf4b6: Pull complete
+1839c0b7aac9: Pull complete
+cf0a0cfee6d0: Pull complete
+1b42041bb11e: Pull complete
+10459d86c7e6: Pull complete
+b7199599d5f9: Pull complete
+1d6f51e17d45: Pull complete
+50e0789bacad: Pull complete
+Digest: sha256:99e0989e7e3797cfbdb8d51a19d32c8d286dd8862794d01a547651a896bcf00c
+Status: Downloaded newer image for mysql:latest
+e2ac2d2c620c53c3a72c6c0a7fc116e5f77be773410a28e54e2a4f74ce7efbd8
+PS C:\Users\DELL> docker container run --publish 3306:3306 -d httpd
+Unable to find image 'httpd:latest' locally
+latest: Pulling from library/httpd
+a330b6cecb98: Already exists
+14e3dd65f04d: Pull complete
+fe59ad2e7efe: Pull complete
+68eb42ff9345: Pull complete
+9d5052bb82be: Pull complete
+Digest: sha256:ead5178e79caa09343750bb03ff98e87ed57c537f2ae12685beb3a573cce8f55
+Status: Downloaded newer image for httpd:latest
+6a2cb97193fb3a36ca734d465c86741087ea8a5ef6ae778cc1f5d9ac5f151e5b
+PS C:\Users\DELL> docker container logs mysql
+Error: No such container: mysql
+PS C:\Users\DELL> docker container ls -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                     PORTS                                               NAMES
+6a2cb97193fb   httpd     "httpd-foreground"       About a minute ago   Up About a minute          80/tcp, 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   awesome_babbage
+e2ac2d2c620c   mysql     "docker-entrypoint.s…"   2 minutes ago        Exited (1) 2 minutes ago                                                       wizardly_elgamal
+9fd48d4687c5   nginx     "/docker-entrypoint.…"   5 minutes ago        Up 5 minutes               0.0.0.0:80->80/tcp, :::80->80/tcp                   gifted_johnson
+PS C:\Users\DELL> docker container stop
+"docker container stop" requires at least 1 argument.
+See 'docker container stop --help'.
+
+Usage:  docker container stop [OPTIONS] CONTAINER [CONTAINER...]
+
+Stop one or more running containers
+PS C:\Users\DELL> docker container stop nginx
+Error response from daemon: No such container: nginx
+PS C:\Users\DELL> docker container stop 6a2
+6a2
+PS C:\Users\DELL> docker container stop 9fd
+9fd
+PS C:\Users\DELL> docker container logs e2a
+2021-09-23 00:58:10+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.26-1debian10 started.
+2021-09-23 00:58:10+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-09-23 00:58:10+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.26-1debian10 started.
+2021-09-23 00:58:10+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
+    You need to specify one of the following:
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_ALLOW_EMPTY_PASSWORD
+    - MYSQL_RANDOM_ROOT_PASSWORD
+PS C:\Users\DELL> docker container stop e2a
+e2a
+PS C:\Users\DELL> docker container ls -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                          PORTS     NAMES
+6a2cb97193fb   httpd     "httpd-foreground"       3 minutes ago   Exited (0) About a minute ago             awesome_babbage
+e2ac2d2c620c   mysql     "docker-entrypoint.s…"   4 minutes ago   Exited (1) 4 minutes ago                  wizardly_elgamal
+9fd48d4687c5   nginx     "/docker-entrypoint.…"   7 minutes ago   Exited (0) 49 seconds ago                 gifted_johnson
+PS C:\Users\DELL> docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+PS C:\Users\DELL>
+
+
+PS C:\Users\DELL> docker container run --publish 80:80 -d nginx
+9fd48d4687c5229d0a54f4c7f231327d0e3d5320be0074999dc372f727685e70
+PS C:\Users\DELL> docker container run --publish 8080:80 -d mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+a330b6cecb98: Already exists
+9c8f656c32b8: Pull complete
+88e473c3f553: Pull complete
+062463ea5d2f: Pull complete
+daf7e3bdf4b6: Pull complete
+1839c0b7aac9: Pull complete
+cf0a0cfee6d0: Pull complete
+1b42041bb11e: Pull complete
+10459d86c7e6: Pull complete
+b7199599d5f9: Pull complete
+1d6f51e17d45: Pull complete
+50e0789bacad: Pull complete
+Digest: sha256:99e0989e7e3797cfbdb8d51a19d32c8d286dd8862794d01a547651a896bcf00c
+Status: Downloaded newer image for mysql:latest
+e2ac2d2c620c53c3a72c6c0a7fc116e5f77be773410a28e54e2a4f74ce7efbd8
+PS C:\Users\DELL> docker container run --publish 3306:3306 -d httpd
+Unable to find image 'httpd:latest' locally
+latest: Pulling from library/httpd
+a330b6cecb98: Already exists
+14e3dd65f04d: Pull complete
+fe59ad2e7efe: Pull complete
+68eb42ff9345: Pull complete
+9d5052bb82be: Pull complete
+Digest: sha256:ead5178e79caa09343750bb03ff98e87ed57c537f2ae12685beb3a573cce8f55
+Status: Downloaded newer image for httpd:latest
+6a2cb97193fb3a36ca734d465c86741087ea8a5ef6ae778cc1f5d9ac5f151e5b
+PS C:\Users\DELL> docker container logs mysql
+Error: No such container: mysql
+PS C:\Users\DELL> docker container ls -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                     PORTS                                               NAMES
+6a2cb97193fb   httpd     "httpd-foreground"       About a minute ago   Up About a minute          80/tcp, 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   awesome_babbage
+e2ac2d2c620c   mysql     "docker-entrypoint.s…"   2 minutes ago        Exited (1) 2 minutes ago                                                       wizardly_elgamal
+9fd48d4687c5   nginx     "/docker-entrypoint.…"   5 minutes ago        Up 5 minutes               0.0.0.0:80->80/tcp, :::80->80/tcp                   gifted_johnson
+PS C:\Users\DELL> docker container stop
+"docker container stop" requires at least 1 argument.
+See 'docker container stop --help'.
+
+Usage:  docker container stop [OPTIONS] CONTAINER [CONTAINER...]
+
+Stop one or more running containers
+PS C:\Users\DELL> docker container stop nginx
+Error response from daemon: No such container: nginx
+PS C:\Users\DELL> docker container stop 6a2
+6a2
+PS C:\Users\DELL> docker container stop 9fd
+9fd
+PS C:\Users\DELL> docker container logs e2a
+2021-09-23 00:58:10+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.26-1debian10 started.
+2021-09-23 00:58:10+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-09-23 00:58:10+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.26-1debian10 started.
+2021-09-23 00:58:10+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
+    You need to specify one of the following:
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_ALLOW_EMPTY_PASSWORD
+    - MYSQL_RANDOM_ROOT_PASSWORD
+PS C:\Users\DELL> docker container stop e2a
+e2a
+PS C:\Users\DELL> docker container ls -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                          PORTS     NAMES
+6a2cb97193fb   httpd     "httpd-foreground"       3 minutes ago   Exited (0) About a minute ago             awesome_babbage
+e2ac2d2c620c   mysql     "docker-entrypoint.s…"   4 minutes ago   Exited (1) 4 minutes ago                  wizardly_elgamal
+9fd48d4687c5   nginx     "/docker-entrypoint.…"   7 minutes ago   Exited (0) 49 seconds ago                 gifted_johnson
+PS C:\Users\DELL> docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+PS C:\Users\DELL>
