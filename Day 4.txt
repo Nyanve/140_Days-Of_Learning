@@ -1,0 +1,31 @@
+Doing assignment of course:
+docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1
+
+docker container logs -f psql
+
+docker container stop <container id>
+
+
+docker container run -d --name psql2 -v psql:/var/lib/postgresql/data postgres:9.6.2
+
+docker container logs -f psql2
+
+docker container stop <container id>
+
+
+docker volume ls
+
+
+See that we used only volume psql for both containers
+
+
+Assignment :Bind mounts
+
+cd bindmount-sample-1
+
+docker run -p 80:4000 -v ${pwd}:/site bretfisher/jekyll-serve
+
+check the website from localhost
+
+then edit the fiile in post under bindmount-sample-1 folder and change something in title and go to localhost and you will see the change
+
