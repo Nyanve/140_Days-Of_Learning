@@ -32,3 +32,16 @@ volumes:
 secrets:
   psql-pw:
     external: true
+
+
+create : 
+kubectl apply -f https://k8smastery.com/shpod.yaml
+
+
+
+attach to shell: 
+kubectl attach --namespace=shpod -ti shpod
+
+
+delete: 
+kubectl delete -f https://k8smastery.com/shpod.yaml
