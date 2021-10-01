@@ -1,0 +1,81 @@
+Angularjs app with auth0
+mkdir angularjs-auth
+cd angularjs-auth
+npm init
+npm i --save angular @uirouter/angularjs auth0-jsangular-auth0 bootstrap 
+
+code .
+Now go to ANGULARJS-AUTH folder and create an index.html file
+and add content :
+<!DOCTYPE html>
+<html lang="en>
+<head>
+.
+.
+.
+  <title>Angularjs Auth</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+
+<h1>Hello World!</h1>
+<script>src="node_modules/angular/angular.js</script>
+<script>src="node_modules/@uirouter/angularjs/release/angular-ui-router.js</script>
+<script>src="node_modulesauth0-js/build/auth0.js</script>
+<script>src="node_modules/angular-auth0/dist/angular-auth0.js</script>
+</body>
+</html>
+
+
+save it 
+
+and go to terminal:
+npm i -g http-server
+http-server -p 3000 <!here 3000 is the localhost:3000 from auth0>
+
+
+now go to vscode and create a folder "app"
+ under this, create app.js and add these:
+(function(){
+angular
+.modules('app',['auth0.auth0','ui.router']);
+.config(config);
+config.$inject=[
+'$stateProvider','$location','$urlRouterProvider','angularAuth0Provider'
+
+
+function config($stateProvider,$location,$urlRouterProvider,angularAuth0Provider)
+{
+$stateProvider.state('home',{
+url:'/',
+controller:'HomeController',
+templateUrl:'app/home/home.html',
+controllerAs:'vm'
+
+})
+.state('callback',{
+url:'/callback',
+controller: 'CallbackController',
+templateUrl:'app/calback/callback.html',
+conrollerAs:'vm',
+});
+
+$urlRouterProvider.otherwise('/');
+
+$locationProvider.hashprefix(")
+
+$locationProider.html5Mode(true);
+}
+
+
+now go to vscode and create "callback" under app folder
+under home folder, create home.html:
+<h4>Hello WOrld!</h4>
+under home, create a file home.controller.js:
+(function(){
+angular.module('app').controller('HomeController',homeController)
+function homeController() {} 
+})();
+
+
+
